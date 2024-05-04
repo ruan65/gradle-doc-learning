@@ -1,5 +1,6 @@
 plugins {
     application
+    id("maven-publish")
 }
 
 repositories {
@@ -47,5 +48,17 @@ tasks.register("greet") {
         println("How are you?")
     }
     dependsOn("hello")
+}
+
+publishing {
+    publications {
+        create<MavenPublication>("maven") {
+            groupId = "com.gradle.tutorial"
+            artifactId = "tutorial"
+            version = "1.0"
+
+            from(components["java"])
+        }
+    }
 }
 
